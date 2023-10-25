@@ -216,7 +216,7 @@ func (bot *SmzdmBot) Checkin() {
 		Send("签到失败:" + errmsg)
 	}
 	log.Println(respstr)
-	Send("签到成功:" + string(body))
+	Send("签到成功:" + errmsg)
 }
 func (bot *SmzdmBot) all_reward() {
 	log.Println("========== all_reward ==========")
