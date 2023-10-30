@@ -203,17 +203,20 @@ func (bot *SmzdmBot) Checkin() {
 	resp, err := bot.Request(http.MethodPost, requestUrl, nil, nil)
 	if err != nil {
 		Send("签到失败:" + err.Error())
+		return 
 	}
 	defer resp.Body.Close()
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		Send("签到失败:" + err.Error())
+		return 
 	}
 	respstr := DecodeUnicode(body)
 	errcode := gjson.Get(respstr, "error_code").String()
 	errmsg := gjson.Get(respstr, "error_msg").String()
 	if errcode != "0" {
 		Send("签到失败:" + errmsg)
+		return 
 	}
 	log.Println(respstr)
 	Send("签到成功:" + errmsg)
